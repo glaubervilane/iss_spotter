@@ -8,12 +8,11 @@ const fetchMyIP = function(callback) {
     }
 
     if (response.statusCode !== 200) {
-      callback(Error(`Request failed with status code ${response.statusCode}`), null);
+      callback(Error(`Request failed with status code ${response.statusCode} when fetching IP: ${body}`), null);
       return;
     }
 
-    const data = JSON.parse(body);
-    const ip = data.ip;
+    const ip = JSON.parse(body).ip;
     callback(null, ip);
   });
 };
