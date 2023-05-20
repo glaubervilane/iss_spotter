@@ -1,0 +1,22 @@
+{
+  "name": "iss_spotter",
+  "version": "1.0.0",
+  "description": "Practicing API requests to 3 different resources to spot the spacial station",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glaubervilane/iss_spotter.git"
+  },
+  "author": "Glauber Marques",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glaubervilane/iss_spotter/issues"
+  },
+  "homepage": "https://github.com/glaubervilane/iss_spotter#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
