@@ -1,20 +1,34 @@
 const request = require('request');
 
-const fetchMyIP = function(callback) {
-  request('https://api.ipify.org?format=json', (error, response, body) => {
+const fetchCoordsByIP = function(ip, callback) {
+  const url = `https://ipwhois.app/json/${ip}`;
+
+  request(url, (error, response, body) => {
     if (error) {
       callback(error, null);
       return;
     }
 
     if (response.statusCode !== 200) {
-      callback(Error(`Request failed with status code ${response.statusCode} when fetching IP: ${body}`), null);
+      callback(Error(`Request failed with status code ${response.statusCode}`), null);
       return;
     }
 
-    const ip = JSON.parse(body).ip;
-    callback(null, ip);
+    const data = JSON.parse(body);
+    const success = data.success;
+
+    if (!success) {
+      const errorMessage = `Invalid IP address when fetching for IP ${ip}`;
+      callback(Error(errorMessage), null);
+      return;
+    }
+
+    const latitude = data.latitude;
+    const longitude = data.longitude;
+    const coordinates = { latitude, longitude };
+
+    callback(null, coordinates);
   });
 };
 
-module.exports = { fetchMyIP };
+module.exports = { fetchCoordsByIP };
